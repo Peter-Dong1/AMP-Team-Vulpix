@@ -25,3 +25,27 @@ JSON ports:
  
 
 AUTO RECONNECT BOT: while true; do ./bot.exe; sleep 5; done
+
+Types of messages:
+What sorts of messages form the protocol between the exchange and you?
+
+You to exchange:
+
+Hello: the first message you must send, identifying yourself to the exchange
+Add: a request to buy or sell a security; “add order”
+Cancel: a request to remove from the book some previously-placed order that hasn’t traded yet
+Convert: a request to convert an ETF or ADR (from or to its underlying basket)
+Exchange to you (private):
+
+Hello: the first message the exchange will send you when you connect, containing your positions
+Ack: “your order was successfully placed on the book” (this does not mean it traded!)
+Reject: “your order wasn’t valid for this reason: …” (e.g. negative price, malformed syntax etc.)
+Error: an error related to your bot that’s not associated with a specific order
+Out: following a cancel or once your order is completely filled, “your order is no longer on the book”
+Fill: “your order traded”
+Exchange to you (public):
+
+Book: “the current state of the book is…”
+Trade: “two (anonymous) people traded at price X”
+Open: “the market for a specific security has opened”
+Close: “the market for a specific security has closed”

@@ -29,6 +29,7 @@ def on_startup(state_manager):
 
 def on_book(state_manager, book_message):
     """Called whenever the book for a symbol updates."""
+    
     pass
 
 def on_fill(state_manager, fill_message):
@@ -71,6 +72,10 @@ def main():
     while True:
         message = exchange.read_message()
 
+
+
+
+        
         # Some of the message types below happen infrequently and contain
         # important information to help you understand what your bot is doing,
         # so they are printed in full. We recommend not always printing every
@@ -101,6 +106,9 @@ def main():
         elif message["type"] == "book":
             print(message)
             on_book(state_manager, message)
+
+
+
 
 
 # ~~~~~============== PROVIDED CODE ==============~~~~~
