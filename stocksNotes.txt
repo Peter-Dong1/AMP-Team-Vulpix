@@ -8,4 +8,4 @@ MS	100
 WFC	100
 XLF	100
 
-XLF = 3 Bond, 2 GS, 3 MS, 2 WFC
+10 XLF = 3 Bond, 2 GS, 3 MS, 2 WFC
