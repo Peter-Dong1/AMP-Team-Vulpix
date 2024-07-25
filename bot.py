@@ -374,10 +374,10 @@ def parse_arguments():
 
     if args.production:
         args.exchange_hostname = "production"
-        args.port = 25000
+        args.port = 20000
     elif args.test:
         args.exchange_hostname = "test-exch-" + team_name
-        args.port = 25000 + test_exchange_port_offsets[args.test]
+        args.port = 20000 + test_exchange_port_offsets[args.test]
         if args.test == "empty":
             args.add_socket_timeout = False
     elif args.specific_address:
