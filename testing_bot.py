@@ -26,21 +26,6 @@ team_name = "VULPIX"
 # have any questions about the starter code, or what to do next, please ask us!
 
 def on_startup(state_manager):
-    # global bid_sum_dict
-    # global bid_count_dict
-    # global bid_avg_dict
-    # global sale_sum_dict
-    # global sale_count_dict
-    # global sale_avg_dict
-    # global avg_dict
-    
-    # bid_sum_dict = {'BOND':1000, 'VALBZ':0, 'VALE':0, 'GS':0, 'MS':0, 'WFC':0, 'XLF':0}
-    # bid_count_dict = {'BOND':0, 'VALBZ':0, 'VALE':0, 'GS':0, 'MS':0, 'WFC':0, 'XLF':0}
-    # sale_sum_dict = {'BOND':1000, 'VALBZ':0, 'VALE':0, 'GS':0, 'MS':0, 'WFC':0, 'XLF':0}
-    # sale_count_dict = {'BOND':0, 'VALBZ':0, 'VALE':0, 'GS':0, 'MS':0, 'WFC':0, 'XLF':0}
-    # bid_avg_dict = {'BOND':0, 'VALBZ':0, 'VALE':0, 'GS':0, 'MS':0, 'WFC':0, 'XLF':0}
-    # sale_avg_dict = {'BOND':0, 'VALBZ':0, 'VALE':0, 'GS':0, 'MS':0, 'WFC':0, 'XLF':0}
-    # avg_dict = {'BOND':0, 'VALBZ':0, 'VALE':0, 'GS':0, 'MS':0, 'WFC':0, 'XLF':0}
     """Called immediately after the exchange's HELLO message. This lets you setup your
     initial state and orders"""
     pass
@@ -49,29 +34,7 @@ def on_startup(state_manager):
 
 def on_book(state_manager, book_message):
     """Called whenever the book for a symbol updates."""
-    # global bid_sum_dict
-    # global bid_count_dict
-    # global bid_avg_dict
-    # global sale_sum_dict
-    # global sale_count_dict
-    # global sale_avg_dict
-    
-    # bid_sum_dict[book_message['symbol']] += max(book_message['buy'])
-    
-    
-    # temp_sell = []
-    # for item in book_message['sell']:
-    #     temp_sell.append(item[0])
-    # sale_sum_dict[book_message['symbol']] += min(temp_sell)
-    # sale_count_dict[book_message['symbol']] += 1
-    
-    # temp_buy = []
-    # for item in book_message['buy']:
-    #     temp_buy.append(item[0])
-    # bid_sum_dict[book_message['symbol']] += min(temp_buy)
-    # bid_count_dict[book_message['symbol']] +=1
 
-    
     bond_position = 0
     if book_message['symbol'] == "BOND":
         #try to sell
@@ -135,91 +98,62 @@ def on_book(state_manager, book_message):
 
 
     # '''Actual stocks'''
-    # elif book_message['symbol'] == 'GS':
-    #     global GS_sell_orders, GS_buy_orders, GS_max_buy_order, GS_min_sell_order
-    #     GS_sell_orders = book_message["sell"]
-    #     GS_buy_orders = book_message["buy"]
+    elif book_message['symbol'] == 'GS':
+        global GS_sell_orders, GS_buy_orders, GS_max_buy_order, GS_min_sell_order
+        GS_sell_orders = book_message["sell"]
+        GS_buy_orders = book_message["buy"]
 
-    #     GS_max_buy = -1
-    #     GS_max_buy_order = -1
-    #     for i in range(len(GS_buy_orders)):
-    #         if GS_buy_orders[i][0] > GS_max_buy:
-    #             GS_max_buy = GS_buy_orders[i][0]
-    #             GS_max_buy_order = GS_buy_orders[i]
+        GS_max_buy = -1
+        GS_max_buy_order = -1
+        for i in range(len(GS_buy_orders)):
+            if GS_buy_orders[i][0] > GS_max_buy:
+                GS_max_buy = GS_buy_orders[i][0]
+                GS_max_buy_order = GS_buy_orders[i]
 
-    #     GS_min_sell = math.inf
-    #     GS_min_sell_order = -1
-    #     for i in range(len(GS_sell_orders)):
-    #         if GS_sell_orders[i][0] < GS_min_sell:
-    #             GS_min_sell = GS_sell_orders[i][0]
-    #             GS_min_sell_order = GS_sell_orders[i]
-
-        
-    #     if sale_count_dict['GS'] >  25:
-    #         if GS_min_sell_order[0]  < avg_dict['GS']:
-    #             state_manager.send_order('GS', 'BUY', GS_min_sell_order[0], GS_min_sell_order[1])
-    #         elif GS_max_buy_order[0]  > avg_dict['GS']:
-                # state_manager.send_order('GS', 'SELL', GS_max_buy_order[0], GS_max_buy_order[1])
-                # 
-
-
-
+        GS_min_sell = math.inf
+        GS_min_sell_order = -1
+        for i in range(len(GS_sell_orders)):
+            if GS_sell_orders[i][0] < GS_min_sell:
+                GS_min_sell = GS_sell_orders[i][0]
+                GS_min_sell_order = GS_sell_orders[i]
     
-    # elif book_message['symbol'] == 'MS':
-    #     global MS_sell_orders, MS_buy_orders, MS_max_buy_order, MS_min_sell_order
-    #     MS_sell_orders = book_message["sell"]
-    #     MS_buy_orders = book_message["buy"]
+    elif book_message['symbol'] == 'MS':
+        global MS_sell_orders, MS_buy_orders, MS_max_buy_order, MS_min_sell_order
+        MS_sell_orders = book_message["sell"]
+        MS_buy_orders = book_message["buy"]
 
-    #     MS_max_buy = -1
-    #     MS_max_buy_order = -1
-    #     for i in range(len(MS_buy_orders)):
-    #         if MS_buy_orders[i][0] > MS_max_buy:
-    #             MS_max_buy = MS_buy_orders[i][0]
-    #             MS_max_buy_order = MS_buy_orders[i]
+        MS_max_buy = -1
+        MS_max_buy_order = -1
+        for i in range(len(MS_buy_orders)):
+            if MS_buy_orders[i][0] > MS_max_buy:
+                MS_max_buy = MS_buy_orders[i][0]
+                MS_max_buy_order = MS_buy_orders[i]
 
-    #     MS_min_sell = math.inf
-    #     MS_min_sell_order = -1
-    #     for i in range(len(MS_sell_orders)):
-    #         if MS_sell_orders[i][0] < MS_min_sell:
-    #             MS_min_sell = MS_sell_orders[i][0]
-    #             MS_min_sell_order = MS_sell_orders[i]
+        MS_min_sell = math.inf
+        MS_min_sell_order = -1
+        for i in range(len(MS_sell_orders)):
+            if MS_sell_orders[i][0] < MS_min_sell:
+                MS_min_sell = MS_sell_orders[i][0]
+                MS_min_sell_order = MS_sell_orders[i]
 
-    # elif book_message['symbol'] == 'WFC':
-    #     global WFC_sell_orders, WFC_buy_orders, WFC_max_buy_order, WFC_min_sell_order
-    #     WFC_sell_orders = book_message["sell"]
-    #     WFC_buy_orders = book_message["buy"]
+    elif book_message['symbol'] == 'WFC':
+        global WFC_sell_orders, WFC_buy_orders, WFC_max_buy_order, WFC_min_sell_order
+        WFC_sell_orders = book_message["sell"]
+        WFC_buy_orders = book_message["buy"]
 
-    #     WFC_max_buy = -1
-    #     WFC_max_buy_order = -1
-    #     for i in range(len(WFC_buy_orders)):
-    #         if WFC_buy_orders[i][0] > WFC_max_buy:
-    #             WFC_max_buy = WFC_buy_orders[i][0]
-    #             WFC_max_buy_order = WFC_buy_orders[i]
+        WFC_max_buy = -1
+        WFC_max_buy_order = -1
+        for i in range(len(WFC_buy_orders)):
+            if WFC_buy_orders[i][0] > WFC_max_buy:
+                WFC_max_buy = WFC_buy_orders[i][0]
+                WFC_max_buy_order = WFC_buy_orders[i]
 
-    #     WFC_min_sell = math.inf
-    #     WFC_min_sell_order = -1
-    #     for i in range(len(WFC_sell_orders)):
-    #         if WFC_sell_orders[i][0] < WFC_min_sell:
-    #             WFC_min_sell = WFC_sell_orders[i][0]
-    #             WFC_min_sell_order = WFC_sell_orders[i]
-    # elif book_message['symbol'] == 'XLF':
-    #     global XLF_sell_orders, XLF_buy_orders, XLF_max_buy_order, XLF_min_sell_order
-    #     XLF_sell_orders = book_message["sell"]
-    #     XLF_buy_orders = book_message["buy"]
-
-    #     XLF_max_buy = -1
-    #     XLF_max_buy_order = -1
-    #     for i in range(len(XLF_buy_orders)):
-    #         if XLF_buy_orders[i][0] > XLF_max_buy:
-    #             XLF_max_buy = XLF_buy_orders[i][0]
-    #             XLF_max_buy_order = XLF_buy_orders[i]
-
-    #     XLF_min_sell = math.inf
-    #     XLF_min_sell_order = -1
-    #     for i in range(len(XLF_sell_orders)):
-    #         if XLF_sell_orders[i][0] < XLF_min_sell:
-    #             XLF_min_sell = XLF_sell_orders[i][0]
-    #             XLF_min_sell_order = XLF_sell_orders[i]
+        WFC_min_sell = math.inf
+        WFC_min_sell_order = -1
+        for i in range(len(WFC_sell_orders)):
+            if WFC_sell_orders[i][0] < WFC_min_sell:
+                WFC_min_sell = WFC_sell_orders[i][0]
+                WFC_min_sell_order = WFC_sell_orders[i]
 
     # elif book_message['symbol'] == 'MS':
     #     pass
@@ -301,24 +235,8 @@ def main():
     global MS_min_sell_order, MS_max_buy_order
     MS_min_sell_order, MS_max_buy_order = [], []
 
-    global WFC_sell_orders, WFC_buy_orders
-    WFC_sell_orders = []
-    WFC_buy_orders = []
-    global WFC_min_sell_order, WFC_max_buy_order
-    WFC_min_sell_order, WFC_max_buy_order = [], []
-
-    global XLF_sell_orders, XLF_buy_orders
-    XLF_sell_orders = []
-    XLF_buy_orders = []
-    global XLF_min_sell_order, XLF_max_buy_order
-    XLF_min_sell_order, XLF_max_buy_order = [], []
-
     while True:
         message = exchange.read_message()
-        global bid_sum_dict
-        global bid_count_dict
-        global sale_sum_dict
-        global sale_count_dict
 
         # Some of the message types below happen infrequently and contain
         # important information to help you understand what your bot is doing,
@@ -356,7 +274,7 @@ def main():
             #if vale sell order is selling at lower than valbz buy orders, buy vale, sell valbz
             if vale_min_sell_order != -1 and valbz_max_buy_order != -1 and len(vale_sell_orders) > 0 and len(valbz_buy_orders) > 0:
                 order_amount = min(valbz_max_buy_order[1], vale_min_sell_order[1])
-                if vale_min_sell_order[0] * order_amount + 11 < valbz_max_buy_order[0] * order_amount: # check if we make profit
+                if vale_min_sell_order[0] * order_amount + 10 < valbz_max_buy_order[0] * order_amount: # check if we make profit
                     state_manager.send_order('VALE', 'BUY', vale_min_sell_order[0], order_amount)
                     exchange.send_convert_message(state_manager.next_order_id(), 'VALE', 'SELL', order_amount)
                     state_manager.send_order('VALBZ', 'SELL', valbz_max_buy_order[0], order_amount)
@@ -364,23 +282,14 @@ def main():
 
             elif vale_max_buy_order != -1 and valbz_min_sell_order != 1 and len(vale_buy_orders) > 0 and len(valbz_sell_orders) > 0:
                 order_amount = min(vale_max_buy_order[1], valbz_min_sell_order[1])
-                if valbz_min_sell_order[0] * order_amount + 11 < vale_max_buy_order[0] * order_amount:
+                if valbz_min_sell_order[0] * order_amount + 10 < vale_max_buy_order[0] * order_amount:
                     state_manager.send_order('VALBZ', 'BUY', valbz_min_sell_order[0], order_amount)
                     exchange.send_convert_message(state_manager.next_order_id(), 'VALBZ', 'SELL', order_amount)
                     state_manager.send_order('VALE', 'SELL', vale_max_buy_order[0], order_amount)
 
 
                 
-            ##rolling median
 
-            # for product in ['VALE', 'VALBZ', 'GS', 'MS', 'WFC', 'XLF']:
-            #     bid_avg_dict[product] = bid_sum_dict[product] / bid_count_dict[product]
-            #     sale_avg_dict[product] = sale_sum_dict[product] / sale_count_dict[product]
-
-            #     avg_dict[product] = (bid_avg_dict[product] + sale_avg_dict[product]) / 2
-                
-                
-                
 
 
 

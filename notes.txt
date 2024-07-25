@@ -3,7 +3,7 @@ Ssh ubuntu@18.224.54.214
 electret-incant-policy-history
 
 
-scp $LOCAL_PATH ubuntu@18.224.54.214:$REMOTE_PATH
+scp $LOCAL_PATH ubuntu@18.224.54.214:.
 
 
 host test-exch-vulpix
@@ -49,3 +49,42 @@ Book: “the current state of the book is…”
 Trade: “two (anonymous) people traded at price X”
 Open: “the market for a specific security has opened”
 Close: “the market for a specific security has closed”
+
+
+
+
+
+
+Exchange protocol example
+Client messages
+HELLO TEAMNAME
+ADD ID SYMBOL BUY|SELL PRICE SIZE
+CONVERT ID SYMBOL BUY|SELL SIZE
+CANCEL ID
+
+{"type": "hello", "team": "ASDF"}
+{"type": "add", "order_id": N, "symbol": "SYM", "dir": "BUY", "price": N, "size": N}
+{"type": "convert", "order_id": N, "symbol": "SYM", "dir": "BUY", "size": N}
+{"type": "cancel", "order_id": N}
+Server messages
+HELLO SYM:POSN SYM:POSN ...
+OPEN SYM SYM SYM ...
+CLOSE SYM SYM SYM ...
+ERROR MSG
+BOOK SYMBOL BUY PRICE:SIZE PRICE:SIZE ... SELL PRICE:SIZE PRICE:SIZE ...
+TRADE SYMBOL PRICE SIZE
+ACK ID
+REJECT ID MSG
+FILL ID SYMBOL DIR PRICE SIZE
+OUT ID
+
+{"type":"hello","symbols":[{"symbol":"SYM","position":N}, ...]}
+{"type":"open","symbols":["SYM1", "SYM2", ...]}
+{"type":"close","symbols":["SYM1", "SYM2", ...]}
+{"type":"error","error":"MSG"}
+{"type":"book","symbol":"SYM","buy":[[PRICE,SIZE], ...],"sell":[...]}
+{"type":"trade","symbol":"SYM","price":N,"size":N}
+{"type":"ack","order_id":N}
+{"type":"reject","order_id":N,"error":"MSG"}
+{"type":"fill","order_id":N,"symbol":"SYM","dir":"BUY","price":N,"size":N}
+{"type":"out","order_id":N}

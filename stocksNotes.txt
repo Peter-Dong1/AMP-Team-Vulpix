@@ -9,3 +9,7 @@ WFC	100
 XLF	100
 
 10 XLF = 3 Bond, 2 GS, 3 MS, 2 WFC
+
+
+VALBZ = fast, tighter
+VALE  = slow, wider
