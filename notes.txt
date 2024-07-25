@@ -1,0 +1,24 @@
+electret-incant-policy-history
+
+
+scp $LOCAL_PATH ubuntu@18.224.54.214:$REMOTE_PATH
+
+
+host test-exch-vulpix
+	-> test-exch-vulpix.amp-2024.js-etc has address 172.31.1.78
+
+
+
+plain text:
+	production : 	20000
+	slower:		20001
+	empty:		20002
+JSON ports:
+	production:	25000
+	slower:		25001
+	empty:		25002
+!!!ex) nc test-exch-vulpix 25000
+
+ 
+
+AUTO RECONNECT BOT: while true; do ./bot.exe; sleep 5; done
