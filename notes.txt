@@ -17,7 +17,8 @@ JSON ports:
 	production:	25000
 	slower:		25001
 	empty:		25002
-!!!ex) nc test-exch-vulpix 25000
+!!!ex) nc test-exch-vulpix 20000
+(use plain text ports (i think))
 
  
 
