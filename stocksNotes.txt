@@ -1,0 +1,11 @@
+symbol	limit
+
+BOND	100
+VALBZ	10
+VALE	10
+GS	100
+MS	100
+WFC	100
+XLF	100
+
+XLF = 3 Bond, 2 GS, 3 MS, 2 WFC
